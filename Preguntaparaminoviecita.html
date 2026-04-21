@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pregunta Importante</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0b2e 0%, #3b114d 100%);
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            line-height: 1.3;
+        }
+
+        .heart-container {
+            margin-bottom: 30px;
+        }
+
+        .heart {
+            font-size: 90px;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px rgba(255, 77, 109, 0.5));
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        button {
+            border: none;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #btn-si {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758f 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            padding: 18px 40px;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+            position: relative;
+            z-index: 5;
+        }
+
+        #btn-si:active {
+            transform: scale(0.95);
+        }
+
+        #btn-no {
+            background-color: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #btn-no:active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #success-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0b2e 0%, #3b114d 100%);
+            z-index: 20;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        #success-container h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ffb3c6;
+            line-height: 1.4;
+        }
+
+        #success-container .success-heart {
+            font-size: 120px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.6));
+            margin-bottom: 20px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 0 10px 2px white;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="main-container">
+        <div class="heart-container">
+            <div class="heart">🦕​💖​​</div>
+        </div>
+        <h1>¿Si puedo seguir siendo tu novio?</h1>
+        <div class="buttons">
+            <button id="btn-si">¡Sipirili</button>
+            <button id="btn-no">No, feo</button>
+        </div>
+    </div>
+
+    <div id="success-container">
+        <div class="success-heart">🦕​💖</div>
+        <h2>Pienso que le diste muchas veces, pero sabia que ibas a decir que si JSJSKJKSJ</h2>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const mainContainer = document.getElementById('main-container');
+        const successContainer = document.getElementById('success-container');
+
+        let noClickCount = 0;
+        let baseSiSize = 22;
+        let baseSiPaddingY = 18;
+        let baseSiPaddingX = 40;
+
+        let baseNoSize = 18;
+        let baseNoPaddingY = 12;
+        let baseNoPaddingX = 30;
+
+        const messagesNo = [
+            "No",
+            "¿Estás segura?",
+            "De verdad vas a decirme eso :(",
+            "¡Ey! Eres una graciosa",
+            "Voy a pensar que no me amas :c",
+            "Cariño, voi a yorar",
+            "Ahhhh vaya, no. Ya no te dejo elegir, ahora te quedas conmigo jasidjwklasd"
+        ];
+
+        btnNo.addEventListener('click', (e) => {
+            e.preventDefault();
+            noClickCount++;
+
+            // Aumentar tamaño del botón Sí drásticamente
+            baseSiSize += 15;
+            baseSiPaddingY += 10;
+            baseSiPaddingX += 20;
+
+            btnSi.style.fontSize = baseSiSize + 'px';
+            btnSi.style.padding = `${baseSiPaddingY}px ${baseSiPaddingX}px`;
+
+            // Disminuir tamaño del botón No
+            baseNoSize = Math.max(0, baseNoSize - 3);
+            baseNoPaddingY = Math.max(0, baseNoPaddingY - 2);
+            baseNoPaddingX = Math.max(0, baseNoPaddingX - 5);
+
+            if (baseNoSize <= 4 || noClickCount >= messagesNo.length - 1) {
+                btnNo.innerText = messagesNo[messagesNo.length - 1];
+                btnNo.style.fontSize = '10px';
+                btnNo.style.padding = '5px 10px';
+                btnNo.style.opacity = '0.5';
+                btnNo.style.pointerEvents = 'none'; // Deshabilita el botón
+            } else {
+                btnNo.style.fontSize = baseNoSize + 'px';
+                btnNo.style.padding = `${baseNoPaddingY}px ${baseNoPaddingX}px`;
+                btnNo.innerText = messagesNo[Math.min(noClickCount, messagesNo.length - 1)];
+            }
+        });
+
+        btnSi.addEventListener('click', () => {
+            mainContainer.style.opacity = '0';
+            setTimeout(() => {
+                mainContainer.style.display = 'none';
+                successContainer.style.display = 'flex';
+                createSparkles();
+            }, 500);
+        });
+
+        function createSparkles() {
+            // Crea brillitos de fondo
+            for (let i = 0; i < 40; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.animationDelay = (Math.random() * 2) + 's';
+                successContainer.appendChild(sparkle);
+            }
+        }
+    </script>
+</body>
+
+</html>
